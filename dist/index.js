@@ -10301,7 +10301,7 @@ try {
   let selectedAnswers = selectRandomAnswers(answerJson, 20);
 
   console.log(`Randomly selected ${selectedAnswers.length} answers.`);
-  // let layout = clg.generateLayout(selectedAnswers);
+  let layout = clg.generateLayout(selectedAnswers);
 
 } catch (error) {
   core.setFailed(error.message);
