@@ -13,7 +13,7 @@ try {
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
 
-  const json = fs.read("./data/cryptocross");
+  const json = fs.read("./data/cryptocross.json");
   let answerJson = JSON.parse(json);
 
   console.log(`There are ${answerJson.length} answers in the answers file.`);
