@@ -19,7 +19,12 @@ try {
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertext).toString("base64");
   output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
-  console.log(Buffer.from(JSON.stringify(output).toString("base64")));
+
+
+  let contents = Buffer.from(JSON.stringify(output)).toString("base64");
+  console.log(`contents: ${contents}`);
+
+
   // core.setOutput(Buffer.from(JSON.stringify(output).toString("base64")));
 } catch (error) {
   core.setFailed(error.message);
