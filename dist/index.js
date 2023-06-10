@@ -10367,10 +10367,20 @@ try {
 
   let output= new Object();
   output.hash = hash;
-  output.ciphertext = Buffer.from(ciphertext).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
-  console.log(Buffer.from(JSON.stringify(output).toString("base64")));
-  // core.setOutput(Buffer.from(JSON.stringify(output).toString("base64")));
+  // output.ciphertext = Buffer.from(ciphertext).toString("base64");
+  // output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
+
+  let contents = JSON.stringify(output);
+  let filename = generateHash(contents);
+
+  console.log(`contents length: ${contents.length}`);
+  console.log(`filename: ${filename}`);
+
+  core.setOutput("filename", filename);
+  core.setOutput("contents", "These are contents");
+
+  const payload = JSON.stringify(github.context.payload, undefined, 2)
+  console.log(`The event payload: ${payload}`);
 } catch (error) {
   core.setFailed(error.message);
 }
