@@ -14,7 +14,9 @@ jobs:
         id: generate-cryptocross
         with:
           size: 20
-      # Use the output from the `hello` step
-      - name: Get the output
+      # Write the filename
+      - name: Get the filename
         run: echo "The filame was ${{ steps.cryptocross.outputs.filename }}"
-        run: echo "The file content size was ${{ steps.cryptocross.outputs.contents.length }}"
+      # Write the file size
+      - name: Get the file size
+        run: echo "The file content size was ${{ steps.cryptocross.outputs.contents.length }}"        
