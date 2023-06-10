@@ -15,13 +15,13 @@ try {
   let map = generateRandomMapping(ALPHABET);
   let ciphertext = applyMapToTable(ALPHABET, map, table);
 
-  let output= new Object();
-  output.hash = hash;
-  output.ciphertext = Buffer.from(ciphertext).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
+  let cc= new Object();
+  cc.hash = hash;
+  cc.ciphertext = Buffer.from(ciphertext).toString("base64");
+  cc.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
 
 
-  let contents = JSON.stringify(output)
+  let contents = JSON.stringify(cc);
   console.log(`contents: ${contents}`);
 
 
