@@ -27,11 +27,11 @@ try {
   console.log(`contents length: ${contents.length}`);
   console.log(`filename: ${filename}`);
 
-  core.setOutput("filename", filename);
   core.setOutput("contents", contents);
-
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
+  core.setOutput("filename", filename);
+  
+  // const payload = JSON.stringify(github.context.payload, undefined, 2)
+  // console.log(`The event payload: ${payload}`);
 } catch (error) {
   core.setFailed(error.message);
 }
