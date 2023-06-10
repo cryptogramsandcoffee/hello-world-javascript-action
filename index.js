@@ -14,12 +14,10 @@ try {
   let map = generateRandomMapping(ALPHABET);
   let ciphertext = applyMapToTable(ALPHABET, map, table);
 
-  console.log(`Result: ${JSON.stringify(layout.result)}`);
-
   let output= new Object();
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertext).toString("base64");
-  output.defintion = Buffer.from(layout.result).toString("base64");;
+  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");;
 
   console.log(JSON.stringify(output));
 
