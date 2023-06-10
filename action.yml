@@ -6,6 +6,8 @@ inputs:
     required: true
     default: 20
 outputs:
+  filename: # id of output
+    description: 'Filename for the contents file.'
   contents: # id of output
     description: 'Base64 encoded cryptocross file contents.'
 runs:

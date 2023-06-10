@@ -16,13 +16,17 @@ try {
   let ciphertext = applyMapToTable(ALPHABET, map, table);
 
   let cc= new Object();
-  cc.hash = hash;
-  cc.ciphertext = Buffer.from(ciphertext).toString("base64");
-  cc.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
+  output.hash = hash;
+  output.ciphertext = Buffer.from(ciphertext).toString("base64");
+  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
 
+  let contents = JSON.stringify(output);
+  let filename = Buffer.from(contents).toString("base64");
 
-  let contents = JSON.stringify(cc);
-  core.setOutput(contents);
+  console.log(`contents length: ${contents.length}`);
+  console.log(`filename: ${filename}`);
+
+  core.setOutput("contents", Buffer.from(JSON.stringify(output).toString("base64")));
 } catch (error) {
   core.setFailed(error.message);
 }
