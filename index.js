@@ -18,8 +18,9 @@ try {
   let output= new Object();
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertext).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");;
-  core.setOutput(Buffer.from(JSON.stringify(output).toString("base64")));
+  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
+  console.log(Buffer.from(JSON.stringify(output).toString("base64")));
+  // core.setOutput(Buffer.from(JSON.stringify(output).toString("base64")));
 } catch (error) {
   core.setFailed(error.message);
 }
