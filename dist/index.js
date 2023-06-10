@@ -10363,8 +10363,10 @@ try {
   let hash = generateHash(table);
   let map = generateRandomMapping(ALPHABET);
   let ciphertext = applyMapToTable(ALPHABET, map, table);
-  let output= new Object();
 
+  console.log(`Result: ${JSON.stringify(layout.result)}`);
+
+  let output= new Object();
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertext).toString("base64");
   output.defintion = Buffer.from(layout.result).toString("base64");;
