@@ -18,5 +18,5 @@ jobs:
       - name: Get the filename
         run: echo "The filame was ${{ steps.cryptocross.outputs.filename }}"
       # Write the file size
-      - name: Get the file size
+      - name: Get the file content size
         run: echo "The file content size was ${{ steps.cryptocross.outputs.contents.length }}"        

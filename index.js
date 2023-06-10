@@ -17,17 +17,18 @@ try {
 
   let output= new Object();
   output.hash = hash;
-  // output.ciphertext = Buffer.from(ciphertext).toString("base64");
-  // output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
+  output.ciphertext = Buffer.from(ciphertext).toString("base64");
+  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
 
   let contents = JSON.stringify(output);
   let filename = generateHash(contents);
+  contents = Buffer.from(contents).toString("base64");
 
   console.log(`contents length: ${contents.length}`);
   console.log(`filename: ${filename}`);
 
   core.setOutput("filename", filename);
-  core.setOutput("contents", "These are contents");
+  core.setOutput("contents", contents);
 
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
