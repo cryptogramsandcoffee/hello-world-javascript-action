@@ -5,9 +5,10 @@ const sjcl = require("sjcl");
 const fs = require('fs');
 
 try {
+  const size = core.getInput("size");
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   answers = JSON.parse(fs.readFileSync("./data/cryptocross.json", "utf8")); 
-  let selectedAnswers = selectRandomAnswers(answers, 20);
+  let selectedAnswers = selectRandomAnswers(answers, size);
   let layout = clg.generateLayout(selectedAnswers);
   let table = JSON.stringify(layout.table).toUpperCase();
   let hash = generateHash(table);
@@ -18,9 +19,7 @@ try {
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertext).toString("base64");
   output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");;
-
-  console.log(JSON.stringify(output));
-
+  core.setOutput(Buffer.from(JSON.stringify(output).toString("base64")));
 } catch (error) {
   core.setFailed(error.message);
 }

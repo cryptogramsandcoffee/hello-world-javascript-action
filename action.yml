@@ -1,13 +1,13 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Generate CryptoCross'
+description: 'Generate a cryptocross output file.'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  size:  # id of input
+    description: 'Number of words in the cryptocross'
     required: true
-    default: 'World'
+    default: 20
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  contents: # id of output
+    description: 'Base64 encoded cryptocross file contents.'
 runs:
   using: 'node16'
   main: 'dist/index.js'
