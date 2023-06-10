@@ -15,18 +15,19 @@ try {
   let map = generateRandomMapping(ALPHABET);
   let ciphertext = applyMapToTable(ALPHABET, map, table);
 
-  let cc= new Object();
+  let output= new Object();
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertext).toString("base64");
   output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
 
   let contents = JSON.stringify(output);
-  let filename = Buffer.from(contents).toString("base64");
+  let filename = generateHash(contents);
 
   console.log(`contents length: ${contents.length}`);
   console.log(`filename: ${filename}`);
 
-  core.setOutput("contents", Buffer.from(JSON.stringify(output).toString("base64")));
+  core.setOutput("filename", filename);
+  core.setOutput("contents", "These are contents");
 } catch (error) {
   core.setFailed(error.message);
 }
