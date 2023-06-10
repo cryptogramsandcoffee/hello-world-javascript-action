@@ -15,5 +15,5 @@ jobs:
         with:
           size: 20
       # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.cryptocross.outputs.time }}"
+      - name: Get the output
+        run: echo "The output was ${{ steps.cryptocross.outputs.contents }}"

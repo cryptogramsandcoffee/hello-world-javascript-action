@@ -22,10 +22,7 @@ try {
 
 
   let contents = JSON.stringify(cc);
-  console.log(`contents: ${contents}`);
-
-
-  // core.setOutput(Buffer.from(JSON.stringify(output).toString("base64")));
+  core.setOutput(contents);
 } catch (error) {
   core.setFailed(error.message);
 }
