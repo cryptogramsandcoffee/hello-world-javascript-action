@@ -14,8 +14,9 @@ try {
   answerJson = JSON.parse(fs.readFileSync('./data/cryptocross.json', 'utf8')); 
   let selectedAnswers = selectRandomAnswers(answerJson, 20);
   let layout = clg.generateLayout(selectedAnswers);
-  let table = JSON.stringify(layout.table).toUpperCase();
-  var hash = generateHash(table);
+  console.log(`typeof layout: ${typeof(layout)}`);
+  // let table = JSON.stringify(layout.table).toUpperCase();
+  var hash = generateHash("table");
   let map = generateRandomMapping(ALPHABET);
 
 
