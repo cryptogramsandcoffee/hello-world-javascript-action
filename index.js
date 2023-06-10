@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const clg = require("crossword-layout-generator");
 const fs = require('fs');
 
 try {
@@ -19,9 +20,8 @@ try {
 
   let selectedAnswers = selectRandomAnswers(answerJson, 20);
 
-  console.log(`Randomly selected ${selectedAnswers.length} answers.`)
-
-
+  console.log(`Randomly selected ${selectedAnswers.length} answers.`);
+  let layout = clg.generateLayout(selectedAnswers);
 
 } catch (error) {
   core.setFailed(error.message);

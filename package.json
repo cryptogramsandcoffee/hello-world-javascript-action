@@ -19,6 +19,7 @@
   "homepage": "https://github.com/cryptogramsandcoffee/hello-world-javascript-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "@actions/github": "^5.1.1"
+    "@actions/github": "^5.1.1",
+    "crossword-layout-generator": "^0.1.1"
   }
 }
