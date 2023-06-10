@@ -17,8 +17,28 @@ try {
 
   console.log(`There are ${answerJson.length} answers in the answers file.`);
 
+  let selectedAnswers = selectRandomAnswers(answerJson, 20);
+
+  console.log(`Randomly selected ${selectedAnswers.length} answers.`)
+
 
 
 } catch (error) {
   core.setFailed(error.message);
+}
+
+
+
+function selectRandomAnswers(answers, size) {
+  if (size >= answers.length) return answers;
+
+  let clone = JSON.parse(JSON.stringify(answers));
+  let selections = new Array();
+  while(selections.length < size) 
+  {
+      let index = Math.floor(Math.random() * clone.length);
+      selections.push(clone[index]);
+      clone.splice(index, 1);
+  }
+  return selections;
 }
