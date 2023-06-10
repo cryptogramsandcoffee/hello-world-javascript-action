@@ -10356,14 +10356,20 @@ const fs = __nccwpck_require__(7147);
 
 try {
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  answerJson = JSON.parse(fs.readFileSync('./data/cryptocross.json', 'utf8')); 
-  let selectedAnswers = selectRandomAnswers(answerJson, 20);
+  answers = JSON.parse(fs.readFileSync("./data/cryptocross.json", "utf8")); 
+  let selectedAnswers = selectRandomAnswers(answers, 20);
   let layout = clg.generateLayout(selectedAnswers);
-  console.log(`typeof layout: ${typeof(layout)}`);
-  // let table = JSON.stringify(layout.table).toUpperCase();
-  var hash = generateHash("table");
+  let table = JSON.stringify(layout.table).toUpperCase();
+  let hash = generateHash(table);
   let map = generateRandomMapping(ALPHABET);
+  let ciphertext = applyMapToTable(ALPHABET, map, table);
+  let output= new Object();
 
+  output.hash = hash;
+  output.ciphertext = Buffer.from(ciphertext).toString("base64");
+  output.defintion = Buffer.from(layout.result).toString("base64");;
+
+  console.log(JSON.stringify(output));
 
 } catch (error) {
   core.setFailed(error.message);
@@ -10402,6 +10408,44 @@ function selectRandomAnswers(answers, size) {
   return selections;
 }
 
+
+function encryptDefinitionAnswers (result, alphabet, map) {
+  Object.values(result).forEach(function(value) {
+      value.answer = applyMap(alphabet, map, value.answer);
+  });
+  return result;       
+}
+
+function applyMap(alphabet, map, answer) {
+  let a = alphabet.split("");
+  let m = map.split("");
+  let e = answer.toUpperCase().split("");
+
+  for (let i = 0; i < e.length; i++) {
+      let alphaIndex = alphabet.indexOf(e[i]);
+      if (alphaIndex > -1) {
+          e[i] = m[alphaIndex];
+      }
+  }
+  return e.join("");        
+}
+
+function applyMapToTable(alphabet, map, table) {
+  let a = alphabet.split("");
+  let m = map.split("");
+  let t = JSON.parse(table);
+
+  for (let i = 0; i < t.length; i++) {
+      let row = t[i];
+      for (let j = 0; j < row.length; j++) {
+          let alphaIndex = alphabet.indexOf(row[j]);
+          if (alphaIndex > -1) {
+              row[j] = m[alphaIndex];
+          }
+      } 
+  }
+  return JSON.stringify(t);
+}
 })();
 
 module.exports = __webpack_exports__;
