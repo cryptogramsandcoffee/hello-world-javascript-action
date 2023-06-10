@@ -13,11 +13,14 @@ try {
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
 
-  fs.readFileSync("./data/cryptocross.json", function (err, data) {
-    if (err) throw err;
-    let answerJson = JSON.parse(data);
-    console.log(`There are ${answerJson.length} answers in the answers file.`);
-  });
+  answerJson = JSON.parse(fs.readFileSync('./data/cryptocross.json', 'utf8')); 
+  console.log(`There are ${answerJson.length} answers in the answers file.`);
+
+  // fs.readFileSync("./data/cryptocross.json", function (err, data) {
+  //   if (err) throw err;
+  //   let answerJson = JSON.parse(data);
+  //   console.log(`There are ${answerJson.length} answers in the answers file.`);
+  // });
 
   // let answerJson = JSON.parse(json);
 
