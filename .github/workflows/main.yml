@@ -9,9 +9,9 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v3
-      - name: generate-cryptocross
+      - name: cryptocross
         uses: ./ # Uses an action in the root directory
-        id: generate-cryptocross
+        id: cryptocross
         with:
           size: 20
       # Write the filename
