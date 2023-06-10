@@ -13,15 +13,20 @@ try {
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
 
-  const json = fs.readFileSync("./data/cryptocross.json");
-  let answerJson = JSON.parse(json);
+  fs.readFileSync("./data/cryptocross.json", function (err, data) {
+    if (err) throw err;
+    let answerJson = JSON.parse(data);
+    console.log(`There are ${answerJson.length} answers in the answers file.`);
+  });
 
-  console.log(`There are ${answerJson.length} answers in the answers file.`);
+  // let answerJson = JSON.parse(json);
 
-  let selectedAnswers = selectRandomAnswers(answerJson, 20);
+  // console.log(`There are ${answerJson.length} answers in the answers file.`);
 
-  console.log(`Randomly selected ${selectedAnswers.length} answers.`);
-  let layout = clg.generateLayout(selectedAnswers);
+  // let selectedAnswers = selectRandomAnswers(answerJson, 20);
+
+  // console.log(`Randomly selected ${selectedAnswers.length} answers.`);
+  // let layout = clg.generateLayout(selectedAnswers);
 
 } catch (error) {
   core.setFailed(error.message);
