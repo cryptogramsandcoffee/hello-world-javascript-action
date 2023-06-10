@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-// const clg = require("crossword-layout-generator");
+const clg = require("crossword-layout-generator");
 const fs = require('fs');
 
 try {
@@ -16,19 +16,9 @@ try {
   answerJson = JSON.parse(fs.readFileSync('./data/cryptocross.json', 'utf8')); 
   console.log(`There are ${answerJson.length} answers in the answers file.`);
 
-  // fs.readFileSync("./data/cryptocross.json", function (err, data) {
-  //   if (err) throw err;
-  //   let answerJson = JSON.parse(data);
-  //   console.log(`There are ${answerJson.length} answers in the answers file.`);
-  // });
+  let selectedAnswers = selectRandomAnswers(answerJson, 20);
 
-  // let answerJson = JSON.parse(json);
-
-  // console.log(`There are ${answerJson.length} answers in the answers file.`);
-
-  // let selectedAnswers = selectRandomAnswers(answerJson, 20);
-
-  // console.log(`Randomly selected ${selectedAnswers.length} answers.`);
+  console.log(`Randomly selected ${selectedAnswers.length} answers.`);
   // let layout = clg.generateLayout(selectedAnswers);
 
 } catch (error) {
