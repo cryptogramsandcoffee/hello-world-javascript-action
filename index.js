@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const clg = require("crossword-layout-generator");
+// const clg = require("crossword-layout-generator");
 const fs = require('fs');
 
 try {
