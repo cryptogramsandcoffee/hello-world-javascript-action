@@ -21,7 +21,7 @@ try {
   output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
 
 
-  let contents = Buffer.from(JSON.stringify(output)).toString("base64");
+  let contents = JSON.stringify(output)
   console.log(`contents: ${contents}`);
 
 
