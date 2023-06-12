@@ -10365,10 +10365,9 @@ try {
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const size = core.getInput("size");
   answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
-  console.log(answers.length);
+  let selectedAnswers = selectRandomAnswers(answers, size);
+  console.log("selected answers: " + selectedAnswers.length);
 
-
-  // let selectedAnswers = selectRandomAnswers(answers, size);
   // let layout = clg.generateLayout(selectedAnswers);
   // let table = JSON.stringify(layout.table).toUpperCase();
   // let hash = generateHash(table);
