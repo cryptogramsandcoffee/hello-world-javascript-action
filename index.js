@@ -4,8 +4,6 @@ const clg = require("crossword-layout-generator");
 const sjcl = require("sjcl");
 const fs = require('fs');
 
-const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 // private paths, answer/clue data source and 
 const CRYPTOCROSS_SOURCE_JSON_PATH = "./data/cryptocross/cryptocross.json";
 const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
@@ -14,16 +12,16 @@ const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
 const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
 
 try {
+  const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const size = core.getInput("size");
   answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
-
-  console.log("answers: " + typeof(answers));
-
-
   let selectedAnswers = selectRandomAnswers(answers, size);
   let layout = clg.generateLayout(selectedAnswers);
   let table = JSON.stringify(layout.table).toUpperCase();
   let hash = generateHash(table);
+
+  console.log("hash: " + hash);
+
   let map = generateRandomMapping(ALPHABET);
   let ciphertable = applyMapToTable(ALPHABET, map, table);
   let cipherdefinition = encryptDefinitionAnswers(layout.result);
