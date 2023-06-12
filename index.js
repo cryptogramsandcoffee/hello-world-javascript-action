@@ -4,28 +4,51 @@ const clg = require("crossword-layout-generator");
 const sjcl = require("sjcl");
 const fs = require('fs');
 
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+// private paths, answer/clue data source and 
+const CRYPTOCROSS_SOURCE_JSON_PATH = "./_data/cryptocross/cryptocross.json";
+const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
+
+// public path, where all the cryptocross json files reside
+const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
+
+
 try {
   const size = core.getInput("size");
-  const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  answers = JSON.parse(fs.readFileSync("./data/cryptocross.json", "utf8")); 
+  answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
   let selectedAnswers = selectRandomAnswers(answers, size);
   let layout = clg.generateLayout(selectedAnswers);
   let table = JSON.stringify(layout.table).toUpperCase();
   let hash = generateHash(table);
   let map = generateRandomMapping(ALPHABET);
-  let ciphertext = applyMapToTable(ALPHABET, map, table);
+  let ciphertable = applyMapToTable(ALPHABET, map, table);
+  let cipherdefinition = encryptDefinitionAnswers(layout.result);
 
   let output= new Object();
   output.hash = hash;
-  output.ciphertext = Buffer.from(ciphertext).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
+  output.ciphertext = Buffer.from(ciphertable).toString("base64");
+  output.defintion = Buffer.from(JSON.stringify(cipherdefinition)).toString("base64");
 
   let contents = JSON.stringify(output);
-  let filename = generateHash(contents);
+  let filename = `${generateHash(contents)}.json`;
   contents = Buffer.from(contents).toString("base64");
 
   console.log(`contents length: ${contents.length}`);
   console.log(`filename: ${filename}`);
+
+  // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
+ 
+  // 1. the public cryptocross folder
+  fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
+
+  // 2. Replace the old cryptocross file with a new one
+  fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
+    if (error) {
+        throw error;
+    }
+    fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents);
+  });
 
   core.setOutput("contents", contents);
   core.setOutput("filename", filename);
