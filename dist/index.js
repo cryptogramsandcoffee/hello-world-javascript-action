@@ -10372,25 +10372,24 @@ try {
   let map = generateRandomMapping(ALPHABET);
   let ciphertable = applyMapToTable(ALPHABET, map, table);
   let cipherdefinition = encryptDefinitionAnswers(layout.result, ALPHABET, map);
-  console.log("cipherdefinition: " + cipherdefinition);
 
-  // let output= new Object();
-  // output.hash = hash;
-  // output.ciphertext = Buffer.from(ciphertable).toString("base64");
-  // output.defintion = Buffer.from(JSON.stringify(output.definition)).toString("base64");
+  let output= new Object();
+  output.hash = hash;
+  output.ciphertext = Buffer.from(ciphertable).toString("base64");
+  output.defintion = Buffer.from(JSON.stringify(output.definition)).toString("base64");
 
-  // let contents = JSON.stringify(output);
-  // let filename = `${generateHash(contents)}.json`;
-  // contents = Buffer.from(contents).toString("base64");
+  let contents = JSON.stringify(output);
+  let filename = `${generateHash(contents)}.json`;
+  contents = Buffer.from(contents).toString("base64");
 
-  // console.log(`contents length: ${contents.length}`);
-  // console.log(`filepath: ${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`);
+  console.log(`contents length: ${contents.length}`);
+  console.log(`filepath: ${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`);
 
 
   // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
  
   // 1. the public cryptocross folder
-  // fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
+  fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
 
   // 2. Replace the old cryptocross file with a new one
   // fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
