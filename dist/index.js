@@ -10378,7 +10378,7 @@ try {
   let output= new Object();
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertable).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(definition)).toString("base64");
+  output.defintion = Buffer.from(JSON.stringify(output.definition)).toString("base64");
 
   let contents = JSON.stringify(output);
   let filename = `${generateHash(contents)}.json`;
