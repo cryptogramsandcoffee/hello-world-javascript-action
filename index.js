@@ -23,8 +23,17 @@ try {
   console.log("hash: " + hash);
 
   let map = generateRandomMapping(ALPHABET);
+
+  console.log("map: " + map);
+
   let ciphertable = applyMapToTable(ALPHABET, map, table);
+
+  console.log("ciphertable: " + ciphertable); 
+
+
   let cipherdefinition = encryptDefinitionAnswers(layout.result);
+
+  console.log("cipherdefinition: " + cipherdefinition);
 
   let output= new Object();
   output.hash = hash;
