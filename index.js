@@ -7,7 +7,7 @@ const fs = require('fs');
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // private paths, answer/clue data source and 
-const CRYPTOCROSS_SOURCE_JSON_PATH = "././_data/cryptocross/cryptocross.json";
+const CRYPTOCROSS_SOURCE_JSON_PATH = "./data/cryptocross/cryptocross.json";
 const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
 
 // public path, where all the cryptocross json files reside
@@ -38,7 +38,7 @@ try {
   contents = Buffer.from(contents).toString("base64");
 
   // console.log(`contents length: ${contents.length}`);
-  console.log(`filepath: ${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`);
+  // console.log(`filepath: ${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`);
 
 
   // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
