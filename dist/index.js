@@ -10366,13 +10366,13 @@ try {
   const size = core.getInput("size");
   answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
   let selectedAnswers = selectRandomAnswers(answers, size);
-  console.log("selected answers: " + selectedAnswers.length);
+  let layout = clg.generateLayout(selectedAnswers);
+  let table = JSON.stringify(layout.table).toUpperCase();
+  let hash = generateHash(table);
+  let map = generateRandomMapping(ALPHABET);
+  let ciphertable = applyMapToTable(ALPHABET, map, table);
 
-  // let layout = clg.generateLayout(selectedAnswers);
-  // let table = JSON.stringify(layout.table).toUpperCase();
-  // let hash = generateHash(table);
-  // let map = generateRandomMapping(ALPHABET);
-  // let ciphertable = applyMapToTable(ALPHABET, map, table);
+  console.log("cipher table: " + ciphertable);
 
   // let cipherdefinition = encryptDefinitionAnswers(layout.result);
   // console.log("cipherdefinition: " + cipherdefinition);
