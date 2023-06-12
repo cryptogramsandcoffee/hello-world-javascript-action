@@ -34,8 +34,8 @@ try {
   let filename = `${generateHash(contents)}.json`;
   contents = Buffer.from(contents).toString("base64");
 
-  console.log(`contents length: ${contents.length}`);
-  console.log(`filename: ${filename}`);
+  // console.log(`contents length: ${contents.length}`);
+  console.log(`filepath: ${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`);
 
   // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
  
