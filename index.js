@@ -14,18 +14,15 @@ const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
 try {
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const size = core.getInput("size");
-  answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
+  let answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
   let selectedAnswers = selectRandomAnswers(answers, size);
   let layout = clg.generateLayout(selectedAnswers);
   let table = JSON.stringify(layout.table).toUpperCase();
   let hash = generateHash(table);
   let map = generateRandomMapping(ALPHABET);
   let ciphertable = applyMapToTable(ALPHABET, map, table);
-
-  console.log("cipher table: " + ciphertable);
-
-  // let cipherdefinition = encryptDefinitionAnswers(layout.result);
-  // console.log("cipherdefinition: " + cipherdefinition);
+  let cipherdefinition = encryptDefinitionAnswers(layout.result);
+  console.log("cipherdefinition: " + cipherdefinition);
 
   // let output= new Object();
   // output.hash = hash;
