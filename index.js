@@ -19,26 +19,16 @@ try {
   let layout = clg.generateLayout(selectedAnswers);
   let table = JSON.stringify(layout.table).toUpperCase();
   let hash = generateHash(table);
-
-  console.log("hash: " + hash);
-
   let map = generateRandomMapping(ALPHABET);
-
-  console.log("map: " + map);
-
   let ciphertable = applyMapToTable(ALPHABET, map, table);
 
-  console.log("ciphertable: " + ciphertable); 
-
-
-  let cipherdefinition = encryptDefinitionAnswers(layout.result);
-
-  console.log("cipherdefinition: " + cipherdefinition);
+  // let cipherdefinition = encryptDefinitionAnswers(layout.result);
+  // console.log("cipherdefinition: " + cipherdefinition);
 
   let output= new Object();
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertable).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(cipherdefinition)).toString("base64");
+  output.defintion = Buffer.from(JSON.stringify(definition)).toString("base64");
 
   let contents = JSON.stringify(output);
   let filename = `${generateHash(contents)}.json`;
