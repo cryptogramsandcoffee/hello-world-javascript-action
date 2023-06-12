@@ -17,6 +17,10 @@ const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
 try {
   const size = core.getInput("size");
   answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
+
+  console.log("answers: " + typeof(answers));
+
+
   let selectedAnswers = selectRandomAnswers(answers, size);
   let layout = clg.generateLayout(selectedAnswers);
   let table = JSON.stringify(layout.table).toUpperCase();
@@ -40,7 +44,7 @@ try {
   // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
  
   // 1. the public cryptocross folder
-  fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
+  // fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
 
   // 2. Replace the old cryptocross file with a new one
   // fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
