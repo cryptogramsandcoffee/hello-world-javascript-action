@@ -21,7 +21,7 @@ try {
   let hash = generateHash(table);
   let map = generateRandomMapping(ALPHABET);
   let ciphertable = applyMapToTable(ALPHABET, map, table);
-  let cipherdefinition = encryptDefinitionAnswers(layout.result);
+  let cipherdefinition = encryptDefinitionAnswers(layout.result, ALPHABET, map);
   console.log("cipherdefinition: " + cipherdefinition);
 
   // let output= new Object();
