@@ -13,7 +13,6 @@ const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
 // public path, where all the cryptocross json files reside
 const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
 
-
 try {
   const size = core.getInput("size");
   answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
@@ -41,6 +40,7 @@ try {
   // console.log(`contents length: ${contents.length}`);
   console.log(`filepath: ${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`);
 
+  
   // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
  
   // 1. the public cryptocross folder
