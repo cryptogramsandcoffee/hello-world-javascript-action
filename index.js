@@ -15,24 +15,27 @@ try {
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const size = core.getInput("size");
   answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
-  let selectedAnswers = selectRandomAnswers(answers, size);
-  let layout = clg.generateLayout(selectedAnswers);
-  let table = JSON.stringify(layout.table).toUpperCase();
-  let hash = generateHash(table);
-  let map = generateRandomMapping(ALPHABET);
-  let ciphertable = applyMapToTable(ALPHABET, map, table);
+  console.log(answers.length);
+
+
+  // let selectedAnswers = selectRandomAnswers(answers, size);
+  // let layout = clg.generateLayout(selectedAnswers);
+  // let table = JSON.stringify(layout.table).toUpperCase();
+  // let hash = generateHash(table);
+  // let map = generateRandomMapping(ALPHABET);
+  // let ciphertable = applyMapToTable(ALPHABET, map, table);
 
   // let cipherdefinition = encryptDefinitionAnswers(layout.result);
   // console.log("cipherdefinition: " + cipherdefinition);
 
-  let output= new Object();
-  output.hash = hash;
-  output.ciphertext = Buffer.from(ciphertable).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(output.definition)).toString("base64");
+  // let output= new Object();
+  // output.hash = hash;
+  // output.ciphertext = Buffer.from(ciphertable).toString("base64");
+  // output.defintion = Buffer.from(JSON.stringify(output.definition)).toString("base64");
 
-  let contents = JSON.stringify(output);
-  let filename = `${generateHash(contents)}.json`;
-  contents = Buffer.from(contents).toString("base64");
+  // let contents = JSON.stringify(output);
+  // let filename = `${generateHash(contents)}.json`;
+  // contents = Buffer.from(contents).toString("base64");
 
   // console.log(`contents length: ${contents.length}`);
   // console.log(`filepath: ${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`);
@@ -51,8 +54,8 @@ try {
   //   fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents);
   // });
 
-  core.setOutput("contents", contents);
-  core.setOutput("filename", filename);
+  core.setOutput("contents", "contents");
+  core.setOutput("filename", "filename");
   
   // const payload = JSON.stringify(github.context.payload, undefined, 2)
   // console.log(`The event payload: ${payload}`);
