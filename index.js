@@ -43,12 +43,12 @@ try {
   fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
 
   // 2. Replace the old cryptocross file with a new one
-  fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
-    if (error) {
-        throw error;
-    }
-    fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents);
-  });
+  // fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
+  //   if (error) {
+  //       throw error;
+  //   }
+  //   fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents);
+  // });
 
   core.setOutput("contents", contents);
   core.setOutput("filename", filename);
