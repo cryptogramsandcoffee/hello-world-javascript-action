@@ -10354,28 +10354,55 @@ const clg = __nccwpck_require__(5582);
 const sjcl = __nccwpck_require__(1184);
 const fs = __nccwpck_require__(7147);
 
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+// private paths, answer/clue data source and 
+const CRYPTOCROSS_SOURCE_JSON_PATH = "./data/cryptocross/cryptocross.json";
+const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
+
+// public path, where all the cryptocross json files reside
+const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
+
 try {
   const size = core.getInput("size");
-  const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  answers = JSON.parse(fs.readFileSync("./data/cryptocross.json", "utf8")); 
+  answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
+
+  console.log("answers: " + typeof(answers));
+
+
   let selectedAnswers = selectRandomAnswers(answers, size);
   let layout = clg.generateLayout(selectedAnswers);
   let table = JSON.stringify(layout.table).toUpperCase();
   let hash = generateHash(table);
   let map = generateRandomMapping(ALPHABET);
-  let ciphertext = applyMapToTable(ALPHABET, map, table);
+  let ciphertable = applyMapToTable(ALPHABET, map, table);
+  let cipherdefinition = encryptDefinitionAnswers(layout.result);
 
   let output= new Object();
   output.hash = hash;
-  output.ciphertext = Buffer.from(ciphertext).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(layout.result)).toString("base64");
+  output.ciphertext = Buffer.from(ciphertable).toString("base64");
+  output.defintion = Buffer.from(JSON.stringify(cipherdefinition)).toString("base64");
 
   let contents = JSON.stringify(output);
-  let filename = generateHash(contents);
+  let filename = `${generateHash(contents)}.json`;
   contents = Buffer.from(contents).toString("base64");
 
-  console.log(`contents length: ${contents.length}`);
-  console.log(`filename: ${filename}`);
+  // console.log(`contents length: ${contents.length}`);
+  // console.log(`filepath: ${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`);
+
+
+  // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
+ 
+  // 1. the public cryptocross folder
+  // fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
+
+  // 2. Replace the old cryptocross file with a new one
+  // fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
+  //   if (error) {
+  //       throw error;
+  //   }
+  //   fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents);
+  // });
 
   core.setOutput("contents", contents);
   core.setOutput("filename", filename);
