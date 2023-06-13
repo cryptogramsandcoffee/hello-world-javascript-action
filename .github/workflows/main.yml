@@ -25,5 +25,5 @@ jobs:
           # git config --local user.name "actions-user"
           # git config --local user.email "actions@github.com"
           git add ./data/cryptcross/
-          git commit -a -m "CryptoCross puzzle files updated ${date}."
+          git commit -m "CryptoCross puzzle files updated ${date}."
           git push              
