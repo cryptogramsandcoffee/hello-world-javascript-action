@@ -10376,7 +10376,7 @@ try {
   let output= new Object();
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertable).toString("base64");
-  output.defintion = Buffer.from(JSON.stringify(output.definition)).toString("base64");
+  output.defintion = Buffer.from(JSON.stringify(cipherdefinition)).toString("base64");
 
   let contents = JSON.stringify(output);
   let filename = `${generateHash(contents)}.json`;
@@ -10389,7 +10389,7 @@ try {
   // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
  
   // 1. the public cryptocross folder
-  fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
+  // fs.writeFile(`${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`, contents);
 
   // 2. Replace the old cryptocross file with a new one
   // fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
