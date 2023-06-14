@@ -31,5 +31,5 @@ jobs:
       - name: Fetch From Master
         run: git fetch origin main
       - name: Push Changes
-        run: git push origin HEAD:master
+        run: git push origin HEAD:main
             
