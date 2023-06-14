@@ -22,7 +22,7 @@ jobs:
         run: echo "The file contents ${{ steps.cryptocross.outputs.contents }}"
       - name: Identify Myself
         run: git config --global user.email "cryptogramsandcoffee@gmail.com"
-             git config --global user.name "Cryptograms and Coffee"
+             git config --global user.name "cryptogramsandcoffee"
       - name: Stage Changes
         run: git add .
       - name: Commit Changes
