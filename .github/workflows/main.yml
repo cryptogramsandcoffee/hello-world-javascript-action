@@ -20,6 +20,9 @@ jobs:
       # Write the file size
       - name: Get the file content size
         run: echo "The file contents ${{ steps.cryptocross.outputs.contents }}"
+      - name: Identify Myself
+        run: git config --global user.email "cryptogramsandcoffee@gmail.com"
+             git config --global user.name "Cryptograms and Coffee"
       - name: Stage Changes
         run: git add .
       - name: Commit Changes
@@ -28,4 +31,4 @@ jobs:
         run: git fetch origin master
       - name: Push Changes
         run: git push origin HEAD:master
-          
+            
