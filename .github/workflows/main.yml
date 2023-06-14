@@ -25,11 +25,9 @@ jobs:
       - name: Provide username
         run: git config --global user.name "cryptogramsandcoffee"
       - name: Stage Changes
-        run: git add .
+        run: git add data _data
       - name: Commit Changes
         run: git commit -m "Committing generated cryptocross files."
-      - name: Fetch From Master
-        run: git fetch origin main
       - name: Push Changes
-        run: git push origin HEAD:main
+        run: git push
             
