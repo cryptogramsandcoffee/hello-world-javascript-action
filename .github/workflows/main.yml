@@ -24,6 +24,8 @@ jobs:
         run: git config --global user.email "cryptogramsandcoffee@gmail.com"
       - name: Provide username
         run: git config --global user.name "cryptogramsandcoffee"
+      - name: Provide token
+        run:  API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       - name: Stage Changes
         run: git add data _data
       - name: Commit Changes
