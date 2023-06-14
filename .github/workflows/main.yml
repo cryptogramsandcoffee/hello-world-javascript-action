@@ -20,8 +20,12 @@ jobs:
       # Write the file size
       - name: Get the file content size
         run: echo "The file contents ${{ steps.cryptocross.outputs.contents }}"
-      - name: Commit files
-        run:
-          git config --local user.name actions-user
-          git config --local user.email "actions@github.com"
+      - name: Stage Changes
+        run: git add .
+      - name: Commit Changes
+        run: git commit -m "Committing generated cryptocross files."
+      - name: Fetch From Master
+        run: git fetch origin master
+      - name: Push Changes
+        run: git push origin HEAD:master
           
