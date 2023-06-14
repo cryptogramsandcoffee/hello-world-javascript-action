@@ -20,9 +20,10 @@ jobs:
       # Write the file size
       - name: Get the file content size
         run: echo "The file contents ${{ steps.cryptocross.outputs.contents }}"
-      - name: Identify Myself
+      - name: Provide email
         run: git config --global user.email "cryptogramsandcoffee@gmail.com"
-             git config --global user.name "cryptogramsandcoffee"
+      - name: Provide username
+        run: git config --global user.name "cryptogramsandcoffee"
       - name: Stage Changes
         run: git add .
       - name: Commit Changes
