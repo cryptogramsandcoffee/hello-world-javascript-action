@@ -10381,7 +10381,6 @@ try {
   let contents = JSON.stringify(output);
   let filename = `${generateHash(contents)}.json`;
   let filepath = `${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`;
-  contents = Buffer.from(contents).toString("base64");
 
   console.log(`contents length: ${contents.length}`);
   console.log(`filepath: ${filepath}`);
@@ -10390,15 +10389,10 @@ try {
   // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
  
   // 1. the public cryptocross folder
-  fs.writeFileSync(filepath, Buffer.from(contents).toString("base64"));
+  fs.writeFileSync(filepath, Buffer.from(contents).toString("utf8"));
 
   // 2. Replace the old cryptocross file with a new one
-  // fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
-  //   if (error) {
-  //       throw error;
-  //   }
-  //   fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents);
-  // });
+  fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents, {flag: "r+"});
 
   core.setOutput("contents", "contents");
   core.setOutput("filename", "filename");
