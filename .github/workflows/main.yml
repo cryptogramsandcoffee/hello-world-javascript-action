@@ -31,5 +31,7 @@ jobs:
       - name: Commit Changes
         run: git commit -m "Committing generated cryptocross files."
       - name: Push Changes
+            with:
+            token: ${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
         run: git push
             
