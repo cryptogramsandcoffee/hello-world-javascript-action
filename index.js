@@ -40,15 +40,10 @@ try {
   // write the current puzzle into two locations, , and also overwrite /data/cryptocross/cryptocross.json
  
   // 1. the public cryptocross folder
-  fs.writeFileSync(filepath, Buffer.from(contents).toString("base64"));
+  fs.writeFileSync(filepath, Buffer.from(contents).toString("utf8"));
 
   // 2. Replace the old cryptocross file with a new one
-  // fs.unlink(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", (error) => {
-  //   if (error) {
-  //       throw error;
-  //   }
-  //   fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents);
-  // });
+  fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents, {flag: "a"});
 
   core.setOutput("contents", "contents");
   core.setOutput("filename", "filename");
