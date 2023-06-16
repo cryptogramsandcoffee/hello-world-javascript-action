@@ -31,7 +31,6 @@ try {
   let contents = JSON.stringify(output);
   let filename = `${generateHash(contents)}.json`;
   let filepath = `${CRYPTOCROSS_OUTPUT_FOLDER_PATH }${filename}`;
-  contents = Buffer.from(contents).toString("base64");
 
   console.log(`contents length: ${contents.length}`);
   console.log(`filepath: ${filepath}`);
