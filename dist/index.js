@@ -10392,7 +10392,7 @@ try {
   fs.writeFileSync(filepath, Buffer.from(contents).toString("utf8"));
 
   // 2. Replace the old cryptocross file with a new one
-  fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents, {flag: "r+"});
+  fs.writeFile(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", contents);
 
   core.setOutput("contents", "contents");
   core.setOutput("filename", "filename");
