@@ -10365,7 +10365,7 @@ try {
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const size = core.getInput("size");
   let answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8"));
-  let indices = JSON.parse(fs.readFileSync(CRYPTOCROSS_INDEX_JSON_PATH , "utf8"));
+  let indices = fs.readFileSync(CRYPTOCROSS_INDEX_JSON_PATH , "utf8");
   
   console.log("indices: " + indices);  
 
@@ -10378,7 +10378,7 @@ try {
   let cipherdefinition = encryptDefinitionAnswers(layout.result, ALPHABET, map);
 
   let output= new Object();
-  output.game = indices.length;
+  // output.game = indices.length;
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertable).toString("base64");
   output.defintion = Buffer.from(JSON.stringify(cipherdefinition)).toString("base64");
