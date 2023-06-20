@@ -10356,7 +10356,7 @@ const fs = __nccwpck_require__(7147);
 
 // private paths, answer/clue data source and 
 const CRYPTOCROSS_SOURCE_JSON_PATH = "./data/cryptocross/cryptocross.json";
-const CRYPTOCROSS_INDEX_JSON_PATH = "./data/cryptocross/index.json";
+const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
 
 // public path, where all the cryptocross json files reside
 const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
