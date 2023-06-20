@@ -5,7 +5,7 @@ const sjcl = require("sjcl");
 const fs = require('fs');
 
 // private paths, answer/clue data source and 
-const CRYPTOCROSS_SOURCE_JSON_PATH = "./data/cryptocross/cryptocross.json";
+const CRYPTOCROSS_SOURCE_JSON_PATH = "./_data/cryptocross/cryptocross.json";
 const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
 
 // public path, where all the cryptocross json files reside
@@ -15,7 +15,7 @@ try {
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const size = core.getInput("size");
   let answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8"));
-  let indices = fs.readFileSync(CRYPTOCROSS_INDEX_JSON_PATH , "utf8");
+  let indices = JSON.parse(fs.readFileSync(CRYPTOCROSS_INDEX_JSON_PATH , "utf8"));
   
   console.log("indices: " + indices);  
 
@@ -28,7 +28,7 @@ try {
   let cipherdefinition = encryptDefinitionAnswers(layout.result, ALPHABET, map);
 
   let output= new Object();
-  // output.game = indices.length;
+  output.game = indices.length;
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertable).toString("base64");
   output.defintion = Buffer.from(JSON.stringify(cipherdefinition)).toString("base64");
@@ -50,8 +50,8 @@ try {
   fs.writeFileSync(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", Buffer.from(contents).toString("utf8"));
 
   // 3. update the index array with the latest hash
-  // indices.push(generateHash(contents));
-  // fs.writeFileSync(CRYPTOCROSS_INDEX_JSON_PATH, Buffer.from(JSON.stringify(indices)).toString("utf8"));
+  indices.push(generateHash(contents));
+  fs.writeFileSync(CRYPTOCROSS_INDEX_JSON_PATH, Buffer.from(JSON.stringify(indices)).toString("utf8"));
   
   core.setOutput("contents", "contents");
   core.setOutput("filename", "filename");
