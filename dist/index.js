@@ -10356,7 +10356,7 @@ const fs = __nccwpck_require__(7147);
 
 // private paths, answer/clue data source and 
 const CRYPTOCROSS_SOURCE_JSON_PATH = "./data/cryptocross/cryptocross.json";
-const CRYPTOCROSS_INDEX_JSON_PATH = "./_data/cryptocross/index.json";
+const CRYPTOCROSS_INDEX_JSON_PATH = "./data/cryptocross/index.json";
 
 // public path, where all the cryptocross json files reside
 const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
@@ -10364,7 +10364,8 @@ const CRYPTOCROSS_OUTPUT_FOLDER_PATH = "./data/cryptocross/";
 try {
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const size = core.getInput("size");
-  let answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8")); 
+  let answers = JSON.parse(fs.readFileSync(CRYPTOCROSS_SOURCE_JSON_PATH, "utf8"));
+  let indices = JSON.parse(fs.readFileSync(CRYPTOCROSS_INDEX_JSON_PATH , "utf8"));  
   let selectedAnswers = selectRandomAnswers(answers, size);
   let layout = clg.generateLayout(selectedAnswers);
   let table = JSON.stringify(layout.table).toUpperCase();
@@ -10374,6 +10375,7 @@ try {
   let cipherdefinition = encryptDefinitionAnswers(layout.result, ALPHABET, map);
 
   let output= new Object();
+  output.game = indices.length;
   output.hash = hash;
   output.ciphertext = Buffer.from(ciphertable).toString("base64");
   output.defintion = Buffer.from(JSON.stringify(cipherdefinition)).toString("base64");
@@ -10394,6 +10396,10 @@ try {
   // 2. Replace the old cryptocross file with a new one
   fs.writeFileSync(CRYPTOCROSS_OUTPUT_FOLDER_PATH + "cryptocross.json", Buffer.from(contents).toString("utf8"));
 
+  // 3. update the index array with the latest hash
+  indices.push(generateHash(contents));
+  fs.writeFileSync(CRYPTOCROSS_INDEX_JSON_PATH, Buffer.from(JSON.stringify(indices)).toString("utf8"));
+  
   core.setOutput("contents", "contents");
   core.setOutput("filename", "filename");
   
